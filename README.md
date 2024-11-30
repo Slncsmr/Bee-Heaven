@@ -22,4 +22,4 @@ Whether you’re managing a single hive or several, Beekeeping Assistant helps y
 • Data Tracking: Log hive inspections, pest control treatments, honey production, and other important beekeeping data.
 
 • API Integrations: Integrates with weather APIs to provide localized recommendations based on current and forecasted weather conditions.
-I want it to look nice, but have all the features that someone who has bees would want.
+I want it to look nice, but have all the features that someone who has bees would want.I would like it if the form could save on someones computer, to reduce costs on the project and to keep the project free for all people. 
