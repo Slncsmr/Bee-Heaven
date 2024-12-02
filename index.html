@@ -1,9 +1,31 @@
+<head>
+    <style>
+        body {
+            background-image: url('formbg.png')
+        }
+    </style>
+</head>
+<body>
 <form>
+    <label for="date">Date and time of inspection: </label>
     <input type="datetime-local" id="date" name="date" />
-    <label for="date">Date and time of inspection</label>
-    <br />
-    <textarea id="Notes" name="Notes rows="4" cols="50">Notes for your inspection</textarea>
+    
+    <label for="weatherinput">Weather of the inspection: </label>
+    <input type ="text" id="weatherinput" size="20" ="Weather">
+    
+    <ul>
+        <input type="checkbox" name="Queen Cells with Egg, Larve, or Pupa seen" value="Yes" /> Queen Cells with Egg, Larve, or Pupa seen<br />
+        
+        <input type="checkbox" name="Swarm" value="Yes" /> Swarm<br />
+
+        <input type="checkbox" name="Spotty Drone Brood" value="Yes"/> Spotty Drone brood<br />
+
+        <input type="checkbox" name="Compact brood pattern" value="Yes"/> Compact brood pattern<br />
+
+        <input type="checkbox" name="Worker brood in all stages " value="Yes"/> Worker brood in all stages <br />
+    </ul>
+    <textarea id="Notes" name="Notes" rows="4" cols="50">Notes for your inspection</textarea>
 
     <input type="submit" value="Submit">
-
 </form>
+</body>
