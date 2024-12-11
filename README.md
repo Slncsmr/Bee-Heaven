@@ -68,4 +68,4 @@ We welcome contributions from the community! Please read our [Contributing Guide
 Beekeeping Assistant is open-source software licensed under the [MIT License](LICENSE).
 
 ## Contact
-For any questions, suggestions, or feedback, feel free to reach out via [GitHub Issues](https://github.com/your-repo-link/issues).
+For any questions, suggestions, or feedback, feel free to reach out via [GitHub Issues](https://github.com/arvaus/Bee-Heaven/issues).
