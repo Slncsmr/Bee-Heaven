@@ -61,8 +61,8 @@ Beekeeping Assistant is an all-in-one, open-source tool designed to help beekeep
 ## Local Data Storage
 To reduce costs and keep the project free for all users, all data is stored locally on the user's device. Ensure you back up your data regularly to prevent loss.
 
-## Contributing
-We welcome contributions from the community! Please read our [Contributing Guide](CONTRIBUTING.md) to learn more about how to get involved.
+<!--## Contributing
+We welcome contributions from the community! Please read our [Contributing Guide](CONTRIBUTING.md) to learn more about how to get involved.-->
 
 ## License
 Beekeeping Assistant is open-source software licensed under the [MIT License](LICENSE).
