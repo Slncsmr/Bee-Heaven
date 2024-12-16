@@ -1,31 +1,136 @@
-<head>
+   <nav>
+        <a href="Page2.html">Weather</a> |
+    </nav>
     <style>
         body {
             background-image: url('formbg.png')
         }
     </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspection Form</title>
+    <script src="https://cdn.jsdelivr.net/npm/alasql/dist/alasql.min.js"></script>
+    <style>
+        body {
+            background-image: url('formbg.png');
+        }
+    </style>
 </head>
 <body>
-<form>
-    <label for="date">Date and time of inspection: </label>
-    <input type="datetime-local" id="date" name="date" />
-    
-    <label for="weatherinput">Weather of the inspection: </label>
-    <input type ="text" id="weatherinput" size="20" ="Weather">
-    
-    <ul>
-        <input type="checkbox" name="Queen Cells with Egg, Larve, or Pupa seen" value="Yes" /> Queen Cells with Egg, Larve, or Pupa seen<br />
-        
-        <input type="checkbox" name="Swarm" value="Yes" /> Swarm<br />
+    <form id="dataForm">
+        <label for="date">Date and time of inspection: </label>
+        <input type="datetime-local" id="date" name="date" />
 
-        <input type="checkbox" name="Spotty Drone Brood" value="Yes"/> Spotty Drone brood<br />
+        <label for="weatherinput">Weather of the inspection: </label>
+        <input type="text" id="weatherinput" size="20" placeholder="Weather">
 
-        <input type="checkbox" name="Compact brood pattern" value="Yes"/> Compact brood pattern<br />
+        <ul>
+            <input type="checkbox" name="Queen Cells" value="Yes" id="queenCells" /> Queen Cells with Egg, Larvae, or Pupa seen
+            <br />
 
-        <input type="checkbox" name="Worker brood in all stages " value="Yes"/> Worker brood in all stages <br />
-    </ul>
-    <textarea id="Notes" name="Notes" rows="4" cols="50">Notes for your inspection</textarea>
+            <input type="checkbox" name="Swarm" value="Yes" id="swarm" /> Swarm
+            <br />
 
-    <input type="submit" value="Submit">
-</form>
+            <input type="checkbox" name="Spotty Drone Brood" value="Yes" id="spottyDroneBrood" /> Spotty Drone Brood
+            <br />
+
+            <input type="checkbox" name="Compact brood pattern" value="Yes" id="compactBrood" /> Compact Brood Pattern
+            <br />
+
+            <input type="checkbox" name="Worker brood" value="Yes" id="workerBrood" /> Worker Brood in All Stages
+            <br />
+        </ul>
+        <textarea id="notes" name="notes" rows="4" cols="50">Notes for your inspection</textarea>
+        <br />
+        <label align="top" for="myFile">Picture upload</label>
+        <input type="file" id="myFile" name="filename">
+
+        <button type="button" id="saveButton">Submit</button>
+    </form>
+
+    <button id="showDataButton">Show Stored Data</button>
+    <button id="exportCsvButton">Export Table to CSV</button>
+    <table border="1" id="dataTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Weather</th>
+                <th>Queen Cells</th>
+                <th>Swarm</th>
+                <th>Spotty Drone Brood</th>
+                <th>Compact Brood</th>
+                <th>Worker Brood</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // Initialize AlaSQL table
+        alasql('CREATE TABLE inspectionData (id INT AUTO_INCREMENT PRIMARY KEY, date STRING, weather STRING, queenCells STRING, swarm STRING, spottyDroneBrood STRING, compactBrood STRING, workerBrood STRING, notes STRING)');
+
+        document.getElementById('saveButton').addEventListener('click', function () {
+            const date = document.getElementById('date').value;
+            const weather = document.getElementById('weatherinput').value;
+            const queenCells = document.getElementById('queenCells').checked ? 'Yes' : 'No';
+            const swarm = document.getElementById('swarm').checked ? 'Yes' : 'No';
+            const spottyDroneBrood = document.getElementById('spottyDroneBrood').checked ? 'Yes' : 'No';
+            const compactBrood = document.getElementById('compactBrood').checked ? 'Yes' : 'No';
+            const workerBrood = document.getElementById('workerBrood').checked ? 'Yes' : 'No';
+            const notes = document.getElementById('notes').value;
+
+            // Insert form data into the AlaSQL table
+            alasql('INSERT INTO inspectionData (date, weather, queenCells, swarm, spottyDroneBrood, compactBrood, workerBrood, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                [date, weather, queenCells, swarm, spottyDroneBrood, compactBrood, workerBrood, notes]);
+
+            alert('Data saved locally!');
+            document.getElementById('dataForm').reset();
+        });
+
+        document.getElementById('showDataButton').addEventListener('click', function () {
+            const data = alasql('SELECT * FROM inspectionData');
+
+            const tableBody = document.querySelector('#dataTable tbody');
+            tableBody.innerHTML = ''; // Clear previous rows
+
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                            <td>${row.id}</td>
+                            <td>${row.date}</td>
+                            <td>${row.weather}</td>
+                            <td>${row.queenCells}</td>
+                            <td>${row.swarm}</td>
+                            <td>${row.spottyDroneBrood}</td>
+                            <td>${row.compactBrood}</td>
+                            <td>${row.workerBrood}</td>
+                            <td>${row.notes}</td>
+                        `;
+                tableBody.appendChild(tr);
+            });
+        });
+
+        // Export Table to CSV
+        document.getElementById('exportCsvButton').addEventListener('click', function () {
+            const data = alasql('SELECT * FROM inspectionData');
+            let csv = 'ID,Date,Weather,Queen Cells,Swarm,Spotty Drone Brood,Compact Brood,Worker Brood,Notes\n';
+
+            data.forEach(row => {
+                csv += `${row.id},${row.date},${row.weather},${row.queenCells},${row.swarm},${row.spottyDroneBrood},${row.compactBrood},${row.workerBrood},${row.notes}\n`;
+            });
+
+            // Create a Blob with CSV data
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'inspection_data.csv';
+
+            // Trigger the download
+            link.click();
+        });
+    </script>
 </body>
+</html>
