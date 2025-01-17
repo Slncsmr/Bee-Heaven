@@ -1,136 +1,329 @@
-   <nav>
-        <a href="Page2.html">Weather</a> |
-    </nav>
-    <style>
-        body {
-            background-image: url('formbg.png')
-        }
-    </style>
+<nav>
+    <a href="Page2.html">Weather</a> |
+    <a href="Discution.html">Collaborate and Share</a>
+    <a href="http://localhost:8800/"target="_blank">Wiki</a>
+</nav>
+<style>
+    body {
+        background-image: url('formbg.png')
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inspection Form</title>
-    <script src="https://cdn.jsdelivr.net/npm/alasql/dist/alasql.min.js"></script>
+    <title>Beekeeping Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/alasql@1.6.3/dist/alasql.min.js"></script>
     <style>
         body {
-            background-image: url('formbg.png');
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/hexagonal.png');
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #f39c12;
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background-color: #fff5e6;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="button"],
+        button {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+        }
+
+            input[type="text"]:focus,
+            input[type="number"]:focus,
+            input[type="date"]:focus {
+                border-color: #f39c12;
+                background-color: #ffffff;
+            }
+
+        button {
+            background-color: #f39c12;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+            button:hover {
+                background-color: #e67e22;
+            }
+
+        .table-container {
+            margin-top: 40px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        td {
+            background-color: #fff5e6;
+        }
+
+        .export-button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+            .export-button:hover {
+                background-color: #2ecc71;
+            }
+
+        .form-container {
+            margin-bottom: 30px;
+        }
+
+        .bee-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
-    <form id="dataForm">
-        <label for="date">Date and time of inspection: </label>
-        <input type="datetime-local" id="date" name="date" />
 
-        <label for="weatherinput">Weather of the inspection: </label>
-        <input type="text" id="weatherinput" size="20" placeholder="Weather">
+    <div class="container">
+        <div class="header-container">
+            <img src="https://img.icons8.com/ios/452/bee.png" class="bee-icon" alt="Bee Icon">
+            <h1>Beekeeping Tracker</h1>
+        </div>
 
-        <ul>
-            <input type="checkbox" name="Queen Cells" value="Yes" id="queenCells" /> Queen Cells with Egg, Larvae, or Pupa seen
-            <br />
+        <div class="form-container">
+            <form id="beekeepingForm">
+                <label for="inspectionDate">Date of Inspection:</label>
+                <input type="date" id="inspectionDate" required>
 
-            <input type="checkbox" name="Swarm" value="Yes" id="swarm" /> Swarm
-            <br />
+                <label for="hiveCondition">Hive Condition:</label>
+                <input type="text" id="hiveCondition" required>
 
-            <input type="checkbox" name="Spotty Drone Brood" value="Yes" id="spottyDroneBrood" /> Spotty Drone Brood
-            <br />
+                <label for="queenStatus">Queen Status:</label>
+                <input type="text" id="queenStatus" required>
 
-            <input type="checkbox" name="Compact brood pattern" value="Yes" id="compactBrood" /> Compact Brood Pattern
-            <br />
+                <label for="broodPattern">Brood Pattern:</label>
+                <input type="text" id="broodPattern" required>
 
-            <input type="checkbox" name="Worker brood" value="Yes" id="workerBrood" /> Worker Brood in All Stages
-            <br />
-        </ul>
-        <textarea id="notes" name="notes" rows="4" cols="50">Notes for your inspection</textarea>
-        <br />
-        <label align="top" for="myFile">Picture upload</label>
-        <input type="file" id="myFile" name="filename">
+                <label for="honeyPollenStores">Honey & Pollen Stores:</label>
+                <input type="text" id="honeyPollenStores" required>
 
-        <button type="button" id="saveButton">Submit</button>
-    </form>
+                <label for="frameCondition">Frame Condition:</label>
+                <input type="text" id="frameCondition" required>
 
-    <button id="showDataButton">Show Stored Data</button>
-    <button id="exportCsvButton">Export Table to CSV</button>
-    <table border="1" id="dataTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Weather</th>
-                <th>Queen Cells</th>
-                <th>Swarm</th>
-                <th>Spotty Drone Brood</th>
-                <th>Compact Brood</th>
-                <th>Worker Brood</th>
-                <th>Notes</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+                <label for="weatherConditions">Weather Conditions:</label>
+                <input type="text" id="weatherConditions" required>
+
+                <label for="floralSources">Floral Sources:</label>
+                <input type="text" id="floralSources" required>
+
+                <label for="harvestDate">Harvest Date:</label>
+                <input type="date" id="harvestDate" required>
+
+                <label for="honeyYield">Honey Yield:</label>
+                <input type="number" id="honeyYield" required>
+
+                <label for="swarmingActivity">Swarming Activity:</label>
+                <input type="text" id="swarmingActivity" required>
+
+                <label for="feeding">Feeding (Yes/No):</label>
+                <input type="text" id="feeding" required>
+
+                <label for="treatments">Hive Treatments:</label>
+                <input type="text" id="treatments" required>
+
+                <label for="pestsDiseases">Pests/Diseases:</label>
+                <input type="text" id="pestsDiseases" required>
+
+                <label for="equipmentMaintenance">Equipment Maintenance:</label>
+                <input type="text" id="equipmentMaintenance" required>
+
+                <label for="hiveLocation">Hive Location:</label>
+                <input type="text" id="hiveLocation" required>
+
+                <label for="expenses">Beekeeping Expenses:</label>
+                <input type="number" id="expenses" required>
+
+                <label for="income">Income from Sales:</label>
+                <input type="number" id="income" required>
+
+                <button type="submit">Add Entry</button>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <h2>Tracked Data</h2>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Date of Inspection</th>
+                        <th>Hive Condition</th>
+                        <th>Queen Status</th>
+                        <th>Brood Pattern</th>
+                        <th>Honey & Pollen Stores</th>
+                        <th>Frame Condition</th>
+                        <th>Weather Conditions</th>
+                        <th>Floral Sources</th>
+                        <th>Harvest Date</th>
+                        <th>Honey Yield</th>
+                        <th>Swarming Activity</th>
+                        <th>Feeding</th>
+                        <th>Treatments</th>
+                        <th>Pests/Diseases</th>
+                        <th>Equipment Maintenance</th>
+                        <th>Hive Location</th>
+                        <th>Expenses</th>
+                        <th>Income</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <button class="export-button" id="exportButton">Export Data as CSV</button>
+    </div>
 
     <script>
-        // Initialize AlaSQL table
-        alasql('CREATE TABLE inspectionData (id INT AUTO_INCREMENT PRIMARY KEY, date STRING, weather STRING, queenCells STRING, swarm STRING, spottyDroneBrood STRING, compactBrood STRING, workerBrood STRING, notes STRING)');
+        // Create a table in AlaSQL to store form data
+        const db = new alasql.Database();
+        db.exec('CREATE TABLE beekeeping_data (inspectionDate DATE, hiveCondition STRING, queenStatus STRING, broodPattern STRING, honeyPollenStores STRING, frameCondition STRING, weatherConditions STRING, floralSources STRING, harvestDate DATE, honeyYield NUMBER, swarmingActivity STRING, feeding STRING, treatments STRING, pestsDiseases STRING, equipmentMaintenance STRING, hiveLocation STRING, expenses NUMBER, income NUMBER)');
 
-        document.getElementById('saveButton').addEventListener('click', function () {
-            const date = document.getElementById('date').value;
-            const weather = document.getElementById('weatherinput').value;
-            const queenCells = document.getElementById('queenCells').checked ? 'Yes' : 'No';
-            const swarm = document.getElementById('swarm').checked ? 'Yes' : 'No';
-            const spottyDroneBrood = document.getElementById('spottyDroneBrood').checked ? 'Yes' : 'No';
-            const compactBrood = document.getElementById('compactBrood').checked ? 'Yes' : 'No';
-            const workerBrood = document.getElementById('workerBrood').checked ? 'Yes' : 'No';
-            const notes = document.getElementById('notes').value;
+        // Function to add form data to the table
+        document.getElementById("beekeepingForm").addEventListener("submit", function (e) {
+            e.preventDefault();
 
-            // Insert form data into the AlaSQL table
-            alasql('INSERT INTO inspectionData (date, weather, queenCells, swarm, spottyDroneBrood, compactBrood, workerBrood, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                [date, weather, queenCells, swarm, spottyDroneBrood, compactBrood, workerBrood, notes]);
+            const formData = {
+                inspectionDate: document.getElementById("inspectionDate").value,
+                hiveCondition: document.getElementById("hiveCondition").value,
+                queenStatus: document.getElementById("queenStatus").value,
+                broodPattern: document.getElementById("broodPattern").value,
+                honeyPollenStores: document.getElementById("honeyPollenStores").value,
+                frameCondition: document.getElementById("frameCondition").value,
+                weatherConditions: document.getElementById("weatherConditions").value,
+                floralSources: document.getElementById("floralSources").value,
+                harvestDate: document.getElementById("harvestDate").value,
+                honeyYield: document.getElementById("honeyYield").value,
+                swarmingActivity: document.getElementById("swarmingActivity").value,
+                feeding: document.getElementById("feeding").value,
+                treatments: document.getElementById("treatments").value,
+                pestsDiseases: document.getElementById("pestsDiseases").value,
+                equipmentMaintenance: document.getElementById("equipmentMaintenance").value,
+                hiveLocation: document.getElementById("hiveLocation").value,
+                expenses: document.getElementById("expenses").value,
+                income: document.getElementById("income").value
+            };
 
-            alert('Data saved locally!');
-            document.getElementById('dataForm').reset();
+            // Insert data into the table
+            db.exec('INSERT INTO beekeeping_data VALUES ?', [Object.values(formData)]);
+
+            // Update the table display
+            displayData();
         });
 
-        document.getElementById('showDataButton').addEventListener('click', function () {
-            const data = alasql('SELECT * FROM inspectionData');
-
-            const tableBody = document.querySelector('#dataTable tbody');
-            tableBody.innerHTML = ''; // Clear previous rows
+        // Function to display the data from the table on the screen
+        function displayData() {
+            const data = db.exec('SELECT * FROM beekeeping_data');
+            const tableBody = document.querySelector("#dataTable tbody");
+            tableBody.innerHTML = "";
 
             data.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                            <td>${row.id}</td>
-                            <td>${row.date}</td>
-                            <td>${row.weather}</td>
-                            <td>${row.queenCells}</td>
-                            <td>${row.swarm}</td>
-                            <td>${row.spottyDroneBrood}</td>
-                            <td>${row.compactBrood}</td>
-                            <td>${row.workerBrood}</td>
-                            <td>${row.notes}</td>
-                        `;
+                const tr = document.createElement("tr");
+                Object.values(row).forEach(cell => {
+                    const td = document.createElement("td");
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                });
                 tableBody.appendChild(tr);
             });
-        });
+        }
 
-        // Export Table to CSV
-        document.getElementById('exportCsvButton').addEventListener('click', function () {
-            const data = alasql('SELECT * FROM inspectionData');
-            let csv = 'ID,Date,Weather,Queen Cells,Swarm,Spotty Drone Brood,Compact Brood,Worker Brood,Notes\n';
-
-            data.forEach(row => {
-                csv += `${row.id},${row.date},${row.weather},${row.queenCells},${row.swarm},${row.spottyDroneBrood},${row.compactBrood},${row.workerBrood},${row.notes}\n`;
-            });
-
-            // Create a Blob with CSV data
-            const blob = new Blob([csv], { type: 'text/csv' });
+        // Function to export data as CSV
+        document.getElementById("exportButton").addEventListener("click", function () {
+            const data = db.exec('SELECT * FROM beekeeping_data');
+            const csvData = data.map(row => Object.values(row).join(',')).join('\n');
+            const csvBlob = new Blob([csvData], { type: 'text/csv' });
+            const url = URL.createObjectURL(csvBlob);
             const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'inspection_data.csv';
-
-            // Trigger the download
+            link.href = url;
+            link.download = 'beekeeping_data.csv';
             link.click();
         });
     </script>
 </body>
 </html>
+
+
+
