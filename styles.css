@@ -10,7 +10,9 @@ body {
     background: #87ceeb; /* Light Blue Background */
     color: #333;
     text-align: center;
-    padding: 20px;
+    border: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .forecast-container {
@@ -19,11 +21,12 @@ body {
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 75px;
     font-weight: 700;
     margin-bottom: 20px;
     letter-spacing: 1px;
     text-transform: uppercase;
+    margin-top: 100px
 }
 
 .forecast-grid {
@@ -31,6 +34,31 @@ h2 {
     justify-content: space-evenly;
     gap: 15px;
     flex-wrap: wrap;
+}
+
+.nav-bar {
+    background-color: #A589EB; /* Dark background for the navbar */
+}
+
+.nav-bar ul {
+    list-style-type: none; /* Remove default bullet points */
+    margin: 0;
+    padding: 0;
+    display: flex;  /*Flexbox for horizontal alignment */
+    justify-content: center; /* Centers the menu items horizontally */
+}
+
+.nav-bar ul li a {
+    display: block;
+    padding: 14px 20px; /* Spacing inside each menu item */
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline */
+    text-align: center; /* Center the text */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.nav-bar ul li a:hover {
+    background-color: #CFEB89; /* Change background on hover */
 }
 
 .forecast-card {
@@ -43,6 +71,7 @@ h2 {
     cursor: pointer;
     text-align: center;
     position: relative;
+    margin-top: 90px;
 }
 
     .forecast-card:hover {
